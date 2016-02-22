@@ -70,4 +70,17 @@ public class LogAnalyzer
     {
         reader.printData();
     }
+    
+    /**
+     * @return number of the acces to server
+     */
+    public int numberOfAccesses(){
+        int total = 0;
+        int hour = 0;
+        while(hour < hourCounts.length) {
+            total+= hourCounts[hour];
+            hour++;
+        }
+        return total;
+    }
 }
