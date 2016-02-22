@@ -83,4 +83,23 @@ public class LogAnalyzer
         }
         return total;
     }
+    
+    /**
+     * @return number of the acces to server
+     */
+    public int busiestHour(){
+        int mostAccess = -1;
+        int hour = 0;
+        while(hour < hourCounts.length) {
+            if(mostAccess != -1){
+                if(hourCounts[hour] > hourCounts[mostAccess]){
+                    mostAccess = hour;
+                }
+            }
+            else if(hourCounts[hour] != 0){mostAccess = hour;}
+            hour++;
+        }
+        if(mostAccess == -1){System.out.println("No se ha ejecutado el método analyzeHourlyData que nos da la información a analizar.");}
+        return mostAccess;
+    }
 }
