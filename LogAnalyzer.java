@@ -92,7 +92,7 @@ public class LogAnalyzer
         int hour = 0;
         while(hour < hourCounts.length) {
             if(mostAccess != -1){
-                if(hourCounts[hour] > hourCounts[mostAccess]){
+                if(hourCounts[hour] >= hourCounts[mostAccess]){
                     mostAccess = hour;
                 }
             }
