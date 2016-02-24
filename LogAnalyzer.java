@@ -85,7 +85,7 @@ public class LogAnalyzer
     }
     
     /**
-     * @return number of the acces to server
+     * @return number of the acces to server in the hour with the most access
      */
     public int busiestHour(){
         int mostAccess = -1;
@@ -99,7 +99,26 @@ public class LogAnalyzer
             else if(hourCounts[hour] != 0){mostAccess = hour;}
             hour++;
         }
-        if(mostAccess == -1){System.out.println("No se ha ejecutado el método analyzeHourlyData que nos da la información a analizar.");}
+        if(mostAccess == -1){System.out.println("No ha habido accesos.");}
         return mostAccess;
+    }
+    
+    /**
+     * @return number of the acces to server in the hour with the lowwest number
+     */
+    public int quietesHour(){
+        int lowAccess = -1;
+        int hour = 0;
+        while(hour < hourCounts.length) {
+            if(lowAccess != -1){
+                if(hourCounts[hour] <= hourCounts[lowAccess]){
+                    lowAccess = hour;
+                }
+            }
+            else if(hourCounts[hour] != 0){lowAccess = hour;}
+            hour++;
+        }
+        if(lowAccess == -1){System.out.println("No ha habido accesos.");}
+        return lowAccess;
     }
 }
