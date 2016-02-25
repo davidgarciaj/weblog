@@ -62,7 +62,7 @@ public class LogAnalyzer
             hour++;
         }
     }
-    
+
     /**
      * Print the lines of data read by the LogfileReader
      */
@@ -70,7 +70,7 @@ public class LogAnalyzer
     {
         reader.printData();
     }
-    
+
     /**
      * @return number of the acces to server
      */
@@ -83,7 +83,7 @@ public class LogAnalyzer
         }
         return total;
     }
-    
+
     /**
      * @return number of the acces to server in the hour with the most access
      */
@@ -102,7 +102,7 @@ public class LogAnalyzer
         if(mostAccess == -1){System.out.println("No ha habido accesos.");}
         return mostAccess;
     }
-    
+
     /**
      * @return number of the acces to server in the hour with the lowwest number
      */
@@ -121,7 +121,7 @@ public class LogAnalyzer
         if(lowAccess == -1){System.out.println("No ha habido accesos.");}
         return lowAccess;
     }
-    
+
     /**
      * @return number of the acces to server in period of two hour with the most access
      */
@@ -148,5 +148,27 @@ public class LogAnalyzer
         }
         if(numAccess == 0){System.out.println("No ha habido accesos.");}
         return mostAccess;
+    }
+
+    /** Analyze the hourly accesses only in the given date
+     *
+     * @param day   The given day
+     * @param month The given month
+     * @param year  The given year
+     */
+    public void analyzeHourlyData(int day, int month, int year)
+    {
+        boolean isInDate = false;
+        while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            if(entry.getDay() == day && entry.getMonth() == month && entry.getYear() == year){
+                isInDate = true;
+            }
+            if(isInDate){
+                int hour = entry.getHour();
+                hourCounts[hour]++;
+                isInDate = false;
+            }
+        }
     }
 }
