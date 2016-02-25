@@ -121,4 +121,32 @@ public class LogAnalyzer
         if(lowAccess == -1){System.out.println("No ha habido accesos.");}
         return lowAccess;
     }
+    
+    /**
+     * @return number of the acces to server in period of two hour with the most access
+     */
+    public String busiestPeriod(){
+        String mostAccess = -1 + "";
+        int numAccess = 0;
+        int hour = 0;
+        while(hour < hourCounts.length) {
+            if(numAccess != 0){
+                if((hourCounts[hour] + hourCounts[hour - 1]) >= numAccess){
+                    numAccess = hourCounts[hour] + hourCounts[hour - 1];
+                    mostAccess = hour - 1 + " - " + hour;
+                }
+            }
+            else if(hour == 0 && (hourCounts[0] + hourCounts[23]) != 0){
+                numAccess = hourCounts[23] + hourCounts[0];
+                mostAccess = "23 - 0";
+            }
+            else if(hour != 0 && (hourCounts[hour] + hourCounts[hour - 1]) != 0){
+                numAccess = hourCounts[hour] + hourCounts[hour - 1];
+                mostAccess = hour - 1 + " - " + hour;
+            }
+            hour++;
+        }
+        if(numAccess == 0){System.out.println("No ha habido accesos.");}
+        return mostAccess;
+    }
 }
